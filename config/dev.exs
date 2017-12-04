@@ -11,10 +11,4 @@ config :logger, :console, format: "[$level] $message\n"
 
 config :phoenix, :stacktrace_depth, 20
 
-config :associations, Associations.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "associations_dev",
-  hostname: "localhost",
-  pool_size: 10
+import_config "dev.secret.exs"

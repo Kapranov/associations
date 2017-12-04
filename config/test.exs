@@ -6,10 +6,4 @@ config :associations, AssociationsWeb.Endpoint,
 
 config :logger, level: :warn
 
-config :associations, Associations.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "associations_test",
-  hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+import_config "test.secret.exs"
