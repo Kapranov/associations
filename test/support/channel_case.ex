@@ -17,14 +17,11 @@ defmodule AssociationsWeb.ChannelCase do
 
   using do
     quote do
-      # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
-      # The default endpoint for testing
       @endpoint AssociationsWeb.Endpoint
     end
   end
-
 
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Associations.Repo)

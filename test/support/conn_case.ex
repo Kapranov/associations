@@ -17,11 +17,9 @@ defmodule AssociationsWeb.ConnCase do
 
   using do
     quote do
-      # Import conveniences for testing with connections
       use Phoenix.ConnTest
       import AssociationsWeb.Router.Helpers
 
-      # The default endpoint for testing
       @endpoint AssociationsWeb.Endpoint
     end
   end
