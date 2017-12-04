@@ -25,6 +25,7 @@ defmodule AssociationsWeb.Endpoint do
     key: "_associations_key",
     signing_salt: "B02DjV7M"
 
+  plug CORSPlug
   plug AssociationsWeb.Router
 
   @doc """

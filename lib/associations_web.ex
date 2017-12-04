@@ -30,6 +30,8 @@ defmodule AssociationsWeb do
       use Phoenix.View, root: "lib/associations_web/templates",
                         namespace: AssociationsWeb
 
+      use JaSerializer.PhoenixView
+
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
 
       import AssociationsWeb.Router.Helpers
