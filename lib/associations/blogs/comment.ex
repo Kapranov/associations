@@ -6,7 +6,7 @@ defmodule Associations.Blogs.Comment do
 
   schema "comments" do
     field :body, :string
-    field :post_id, :id
+    belongs_to :post, Associations.Blogs.Post
 
     timestamps()
   end
@@ -14,7 +14,7 @@ defmodule Associations.Blogs.Comment do
   @doc false
   def changeset(%Comment{} = comment, attrs) do
     comment
-    |> cast(attrs, [:body])
+    |> cast(attrs, [:body, :post_id])
     |> validate_required([:body])
   end
 end

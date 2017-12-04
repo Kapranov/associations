@@ -11,7 +11,11 @@ defmodule AssociationsWeb.Router do
   scope "/api", AssociationsWeb do
     pipe_through :api
 
-    get "/", PageController, :index
+    get "/", PostController, :index
+
+    resources "/posts", PostController, except: [:new, :edit]
+    resources "/comments", CommentController, except: [:new, :edit]
+    resources "/tags", TagController, except: [:new, :edit]
   end
 
   def cors(conn, _opts) do

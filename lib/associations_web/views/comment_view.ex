@@ -1,17 +1,7 @@
 defmodule AssociationsWeb.CommentView do
   use AssociationsWeb, :view
-  alias AssociationsWeb.CommentView
 
-  def render("index.json", %{comments: comments}) do
-    %{data: render_many(comments, CommentView, "comment.json")}
-  end
+  attributes [:body, :post_id]
 
-  def render("show.json", %{comment: comment}) do
-    %{data: render_one(comment, CommentView, "comment.json")}
-  end
-
-  def render("comment.json", %{comment: comment}) do
-    %{id: comment.id,
-      body: comment.body}
-  end
+  def type(_comment, _conn), do: "comments"
 end

@@ -8,7 +8,7 @@ defmodule Associations.Blogs.Post do
     field :body, :string
     field :is_published, :boolean, default: false
     field :title, :string
-    field :views, :integer
+    field :views, :integer, default: 0
 
     timestamps()
   end
