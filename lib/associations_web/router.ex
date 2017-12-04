@@ -22,6 +22,6 @@ defmodule AssociationsWeb.Router do
     conn
     |> put_resp_header("Access-Control-Allow-Origin", "*")
     |> put_resp_header("Access-Control-Allow-Headers", "Content-Type")
-    |> put_resp_header("Access-Control-Allow-Methods", "GET,PUT,PATCH,OPTIONS,DELETE,POST")
+    |> put_resp_header("Access-Control-Allow-Methods", "GET,PUT,PATCH,DELETE,POST")
   end
 end

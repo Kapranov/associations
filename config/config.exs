@@ -19,9 +19,9 @@ config :associations, :generators,
   binary_id: false
 
 config :cors_plug,
-  origin: "http://localhost:4000",
+  origin: ["*"],
   max_age: 86400,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"]
+  methods: ["GET", "HEAD", "POST", "OPTIONS", "PUT", "PATCH", "DELETE"]
 
 config :phoenix, :format_encoders,
   "json-api": Poison

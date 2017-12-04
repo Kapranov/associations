@@ -269,6 +269,8 @@ curl  --header "Content-Type: application/vnd.api+json" \
       -X DELETE http://localhost:4000/api/tags/4
 ```
 
+## Testing
+
 ## To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
