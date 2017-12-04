@@ -1,12 +1,11 @@
 defmodule Associations.Blogs.Comment do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Associations.Blogs.Comment
-
+  alias Associations.Blogs.{Comment, Post}
 
   schema "comments" do
     field :body, :string
-    belongs_to :post, Associations.Blogs.Post
+    belongs_to :post, Post
 
     timestamps()
   end

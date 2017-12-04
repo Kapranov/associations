@@ -6,6 +6,8 @@ defmodule AssociationsWeb.TagController do
 
   action_fallback AssociationsWeb.FallbackController
 
+  # plug :scrub_params, "tag" when action in [:create, :update]
+
   def index(conn, _params) do
     tags = Blogs.list_tags()
     render(conn, "index.json-api", data: tags)

@@ -3,7 +3,6 @@ defmodule Associations.Blogs.Post do
   import Ecto.Changeset
   alias Associations.Blogs.Post
 
-
   schema "posts" do
     field :body, :string
     field :is_published, :boolean, default: false

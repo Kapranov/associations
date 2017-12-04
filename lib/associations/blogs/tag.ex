@@ -3,7 +3,6 @@ defmodule Associations.Blogs.Tag do
   import Ecto.Changeset
   alias Associations.Blogs.Tag
 
-
   schema "tags" do
     field :name, :string
 

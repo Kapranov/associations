@@ -234,6 +234,10 @@ curl  --header "Content-Type: application/vnd.api+json" \
 
 curl  --header "Content-Type: application/vnd.api+json" \
       --header "Accept: application/vnd.api+json" \
+      -X GET http://localhost:4000/api/comments/3
+
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
       --data '{"data":{"type":"comment","attributes":{"body":"testing"}}}' \
       -X PUT http://localhost:4000/api/comments/3
 
@@ -256,6 +260,10 @@ curl  --header "Content-Type: application/vnd.api+json" \
 
 curl  --header "Content-Type: application/vnd.api+json" \
       --header "Accept: application/vnd.api+json" \
+      -X GET http://localhost:4000/api/tags/3
+
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
       --data '{"data":{"type":"tag","attributes":{"name":"Joe Scarborought"}}}' \
       -X PUT http://localhost:4000/api/tags/3
 
@@ -267,6 +275,16 @@ curl  --header "Content-Type: application/vnd.api+json" \
 curl  --header "Content-Type: application/vnd.api+json" \
       --header "Accept: application/vnd.api+json" \
       -X DELETE http://localhost:4000/api/tags/4
+```
+
+**And our routes:**
+
+```bash
+GET "/"       # List all of posts, comments, tags recorded
+GET "/:id"    # Show only a single record based on it's ID
+POST "/"      # Record a new posts, comments, tags
+DELETE "/:id" # Delete a post, comment, tag by ID
+PATCH "/:id"  # Update a post, comment, tag by ID
 ```
 
 ## Testing

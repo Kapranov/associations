@@ -6,6 +6,8 @@ defmodule AssociationsWeb.Router do
     plug :accepts, ["json-api", "json"]
     plug JaSerializer.ContentTypeNegotiation
     plug JaSerializer.Deserializer
+    plug :put_resp_content_type, MIME.type("json")
+    plug :my_handler
   end
 
   scope "/api", AssociationsWeb do
@@ -23,5 +25,14 @@ defmodule AssociationsWeb.Router do
     |> put_resp_header("Access-Control-Allow-Origin", "*")
     |> put_resp_header("Access-Control-Allow-Headers", "Content-Type")
     |> put_resp_header("Access-Control-Allow-Methods", "GET,PUT,PATCH,DELETE,POST")
+  end
+
+  def my_handler(conn, _opts) do
+    Plug.Conn.register_before_send(conn, fn conn ->
+      IO.puts "/== START GENERATED RESPONSE =="
+      IO.puts conn.resp_body
+      IO.puts "\\==  END GENERATED RESPONSE  =="
+      conn
+    end)
   end
 end

@@ -6,6 +6,8 @@ defmodule AssociationsWeb.PostController do
 
   action_fallback AssociationsWeb.FallbackController
 
+  # plug :scrub_params, "post" when action in [:create, :update]
+
   def index(conn, _params) do
     posts = Blogs.list_posts()
     render(conn, "index.json-api", data: posts)

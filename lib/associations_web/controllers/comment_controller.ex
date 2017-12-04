@@ -6,6 +6,8 @@ defmodule AssociationsWeb.CommentController do
 
   action_fallback AssociationsWeb.FallbackController
 
+  # plug :scrub_params, "comment" when action in [:create, :update]
+
   def index(conn, _params) do
     comments = Blogs.list_comments()
     render(conn, "index.json-api", data: comments)
