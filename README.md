@@ -27,6 +27,12 @@ mix phx.new --no-brunch --no-html associations
 mix ecto.create
 ```
 
+```elixir
+mix phx.gen.json Blogs Post posts title:string body:text views:integer is_published:boolean
+mix phx.gen.json Blogs Comment comments body:text post_id:references:posts
+mix phx.gen.json Blogs Tag tags name:string
+```
+
 ## To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
