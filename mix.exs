@@ -30,6 +30,9 @@ defmodule Associations.Mixfile do
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
+      {:ja_serializer, "~> 0.12"},
+      {:cors_plug, "~> 1.4"},
+      {:faker_elixir_octopus, "~> 1.0.2", only: [:dev, :test]},
       {:cowboy, "~> 1.0"}
     ]
   end
