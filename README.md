@@ -3,8 +3,152 @@
 Associations are implemented using macro-style calls, so that you can
 declaratively add features to your models.
 
+## Ecto
+
+`Ecto 2.0` by using the new `cast_assoc` and `cast_embed` APIs.
+
 Associations in Ecto are used when two different sources (tables) are
 linked via foreign keys.
+
+A classic example of this setup is *Post has many comments* First create
+the two tables in migrations:
+
+```elixir
+# priv/repo/migrations/20171204103713_create_posts.exs
+defmodule Associations.Repo.Migrations.CreatePosts do
+  use Ecto.Migration
+
+  def change do
+    create table(:posts) do
+      add :title, :string
+      add :body, :text
+      add :views, :integer, default: 0
+      add :is_published, :boolean, default: false, null: false
+
+      timestamps()
+    end
+
+  end
+end
+```
+
+```elixir
+# priv/repo/migrations/20171204103724_create_comments.exs
+defmodule Associations.Repo.Migrations.CreateComments do
+  use Ecto.Migration
+
+  def change do
+    create table(:comments) do
+      add :body, :text
+      # add :post_id, references(:posts, on_delete: :nothing)
+      add :post_id, references(:posts, on_delete: :delete_all, type: :id)
+
+      timestamps()
+    end
+
+    create index(:comments, [:post_id])
+  end
+end
+```
+
+```elixir
+# priv/repo/migrations/20171204103736_create_tags.exs
+defmodule Associations.Repo.Migrations.CreateTags do
+  use Ecto.Migration
+
+  def change do
+    create table(:tags) do
+      add :name, :string
+
+      timestamps()
+    end
+
+  end
+end
+```
+
+Each comment contains a `post_id` column that by default points to a
+post `id`. And now define the schemas:
+
+```elixir
+# lib/associations/blogs/post.ex
+defmodule Associations.Blogs.Post do
+  use Ecto.Schema
+  import Ecto.Changeset
+  alias Associations.Blogs.Post
+
+
+  schema "posts" do
+    field :body, :string
+    field :is_published, :boolean, default: false
+    field :title, :string
+    field :views, :integer, default: 0
+
+    timestamps()
+  end
+
+  @doc false
+  def changeset(%Post{} = post, attrs) do
+    post
+    |> cast(attrs, [:title, :body, :views, :is_published])
+    |> validate_required([:title, :body, :views, :is_published])
+  end
+end
+```
+
+```elixir
+# lib/associations/blogs/comment.ex
+defmodule Associations.Blogs.Comment do
+  use Ecto.Schema
+  import Ecto.Changeset
+  alias Associations.Blogs.Comment
+
+
+  schema "comments" do
+    field :body, :string
+    # field :post_id, :id
+    belongs_to :post, Associations.Blogs.Post
+
+    timestamps()
+  end
+
+  @doc false
+  def changeset(%Comment{} = comment, attrs) do
+    comment
+    |> cast(attrs, [:body, :post_id])
+    |> validate_required([:body])
+  end
+end
+```
+
+```elixir
+# lib/associations/blogs/tag.ex
+defmodule Associations.Blogs.Tag do
+  use Ecto.Schema
+  import Ecto.Changeset
+  alias Associations.Blogs.Tag
+
+
+  schema "tags" do
+    field :name, :string
+
+    timestamps()
+  end
+
+  @doc false
+  def changeset(%Tag{} = tag, attrs) do
+    tag
+    |> cast(attrs, [:name])
+    |> validate_required([:name])
+  end
+end
+```
+
+## The `belongs_to` Association
+
+A `belongs_to` association sets up a one-to-one connection with another
+model, such that each instance of the declaring model "belongs to" one
+instance of the other model.
 
 ## The Types of Associations
 
