@@ -1,11 +1,9 @@
 defmodule AssociationsWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :associations
 
-  socket "/socket", AssociationsWeb.UserSocket
-
   plug Plug.Static,
     at: "/", from: :associations, gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w()
 
   if code_reloading? do
     plug Phoenix.CodeReloader

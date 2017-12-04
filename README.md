@@ -23,6 +23,10 @@ The Phoenix supports six types associations:
 mix phx.new --no-brunch --no-html associations
 ```
 
+```bash
+mix ecto.create
+```
+
 ## To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`

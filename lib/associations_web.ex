@@ -22,7 +22,6 @@ defmodule AssociationsWeb do
       use Phoenix.Controller, namespace: AssociationsWeb
       import Plug.Conn
       import AssociationsWeb.Router.Helpers
-      import AssociationsWeb.Gettext
     end
   end
 
@@ -31,12 +30,9 @@ defmodule AssociationsWeb do
       use Phoenix.View, root: "lib/associations_web/templates",
                         namespace: AssociationsWeb
 
-      # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
 
       import AssociationsWeb.Router.Helpers
-      import AssociationsWeb.ErrorHelpers
-      import AssociationsWeb.Gettext
     end
   end
 
@@ -45,13 +41,6 @@ defmodule AssociationsWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
-    end
-  end
-
-  def channel do
-    quote do
-      use Phoenix.Channel
-      import AssociationsWeb.Gettext
     end
   end
 
