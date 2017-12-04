@@ -19,19 +19,30 @@ The Phoenix supports six types associations:
 
 ## Start an examples
 
-```elixir
-mix phx.new --no-brunch --no-html associations
-```
+Create App: `mix phx.new --no-brunch --no-html associations`
 
-```bash
-mix ecto.create
-```
+Create DBs: `mix ecto.create`
+
+Create Resources `Posts/Comments/Tags`:
 
 ```elixir
 mix phx.gen.json Blogs Post posts title:string body:text views:integer is_published:boolean
 mix phx.gen.json Blogs Comment comments body:text post_id:references:posts
 mix phx.gen.json Blogs Tag tags name:string
 ```
+
+After modifications the schema: `mix ecto.migrate`
+
+Start server for check it out: `mix phx.server`
+
+```bash
+http :4000/api          # {"data": [],"jsonapi":{"version": "1.0"}}
+http :4000/api/posts    # {"data": [],"jsonapi":{"version": "1.0"}}
+http :4000/api/comments # {"data": [],"jsonapi":{"version": "1.0"}}
+http :4000/api/tags     # {"data": [],"jsonapi":{"version": "1.0"}}
+```
+
+Create seeds for models: `mix run priv/repo/seeds.exs`
 
 ## To start your Phoenix server:
 
