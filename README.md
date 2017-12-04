@@ -44,6 +44,87 @@ http :4000/api/tags     # {"data": [],"jsonapi":{"version": "1.0"}}
 
 Create seeds for models: `mix run priv/repo/seeds.exs`
 
+Check it out GET/POST/PUT/DELETE/ requests:
+
+**root `/api` path:**
+
+```bash
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      -X GET http://localhost:4000/api
+```
+
+
+**`Posts` table:**
+
+```bash
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      -X GET http://localhost:4000/api/posts
+
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      -X GET http://localhost:4000/api/posts/3
+
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      --data '{"data":{"type":"post","attributes":{"title":"testing"}}}' \
+      -X PUT http://localhost:4000/api/posts/3
+
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      --data '{"data":{"type":"post","attributes":{"views":0,"title":"demo","is_published":false,"body":"testing"}}}' \
+      -X POST http://localhost:4000/api/posts
+
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      -X DELETE http://localhost:4000/api/posts/4
+```
+
+**`Comments` table:**
+
+```bash
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      -X GET http://localhost:4000/api/comments
+
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      --data '{"data":{"type":"comment","attributes":{"body":"testing"}}}' \
+      -X PUT http://localhost:4000/api/comments/3
+
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      --data '{"data":{"type":"comment","attributes":{"post_id": 1, "body":"testing"}}}' \
+      -X POST http://localhost:4000/api/comments
+
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      -X DELETE http://localhost:4000/api/comments/4
+```
+
+**`Tags` table:**
+
+```bash
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      -X GET http://localhost:4000/api/tags
+
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      --data '{"data":{"type":"tag","attributes":{"name":"Joe Scarborought"}}}' \
+      -X PUT http://localhost:4000/api/tags/3
+
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      --data '{"data":{"type":"tag","attributes":{"name":"Donny Deutsch"}}}' \
+      -X POST http://localhost:4000/api/tags
+
+curl  --header "Content-Type: application/vnd.api+json" \
+      --header "Accept: application/vnd.api+json" \
+      -X DELETE http://localhost:4000/api/tags/4
+```
+
 ## To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
